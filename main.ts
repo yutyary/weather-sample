@@ -1,19 +1,18 @@
-input.onButtonPressed(Button.A, function () {
-    item = !(item)
+    item += 1
 })
-let current_WindDirection_List = ""
-let current_WindSpeed = 0
-let item = false
-serial.redirectToUSB()
-weatherbit.startWindMonitoring()
-item = true
-// Note: If "???" is displayed, direction is unknown!
+let item = 0
+weatherbit.startWeatherMonitoring()
 basic.forever(function () {
-    current_WindSpeed = weatherbit.windSpeed()
-    current_WindDirection_List = weatherbit.windDirection()
-    basic.showString("Sp")
-    basic.showNumber(Math.trunc(current_WindSpeed))
-    basic.showString("Dir")
-    basic.showString(current_WindDirection_List)
-    serial.writeLine("" + current_WindSpeed + "," + current_WindDirection_List)
+    if (item == 0) {
+        basic.showString("Temp C: ")
+        basic.showNumber(Math.idiv(weatherbit.temperature(), 100))
+    } else if (item == 1) {
+        basic.showString("Humidity %: ")
+        basic.showNumber(Math.idiv(weatherbit.humidity(), 1024))
+    } else if (item == 2) {
+        basic.showString("Pressure hPa: ")
+        basic.showNumber(Math.idiv(weatherbit.pressure(), 25600))
+    } else {
+        item = 0
+    }
 })
