@@ -11,12 +11,9 @@ item = true
 basic.forever(function () {
     current_WindSpeed = weatherbit.windSpeed()
     current_WindDirection_List = weatherbit.windDirection()
-    if (item) {
-        basic.showString("Sp")
-        basic.showNumber(Math.trunc(current_WindSpeed))
-    } else {
-        basic.showString("Dir")
-        basic.showString(current_WindDirection_List)
-    }
+    basic.showString("Sp")
+    basic.showNumber(Math.trunc(current_WindSpeed))
+    basic.showString("Dir")
+    basic.showString(current_WindDirection_List)
     serial.writeLine("" + current_WindSpeed + "," + current_WindDirection_List)
 })
