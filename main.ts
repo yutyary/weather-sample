@@ -1,3 +1,4 @@
+input.onButtonPressed(Button.A, function () {
     item += 1
 })
 let item = 0
